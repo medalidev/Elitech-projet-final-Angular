@@ -1,0 +1,99 @@
+/* Start General Styles */
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* End General Styles */
+
+/* Start Header Styles */
+header {
+    margin-top: 70px;
+}
+
+.header__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+    background-color: #fafafa;
+    border: 2px solid #eee;
+}
+
+.nav__list {
+    display: flex;
+}
+
+.nav__link {
+    display: block;
+    padding: 20px 20px;
+    color: #344854;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.nav__link.active {
+    color: #fff;
+    background-color: #344854;
+}
+
+/* End Header Styles */
+
+/* Start The Main Section */
+.table__header {
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.table__header label {
+    padding: 5px 14px;
+    color: #fff;
+    background-color: #344854;
+    font-size: 12px;
+}
+
+.table__header input {
+    border-radius: 2px;
+}
+
+.table__header button {
+    border-radius: 2px;
+}
+
+.add__btn {
+    border: 3px solid #eee;
+    color: #eee;
+    background-color: #344854;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.table {
+    cursor: pointer;
+}
+
+/* End The Main Section */
+
+/* Start Users Section */
+
+table {
+    background-color: #fafafa;
+}
+
+/* End Users Section */
+
+/* Start Modals Styles */
+.close-btn-modal {
+    border: none;
+    background-color: transparent;
+    font-size: 25px;
+}
+
+/* End Modals Styles */

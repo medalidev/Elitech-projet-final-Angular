@@ -1,0 +1,340 @@
+<header class="header">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center header__content">
+            <div class="d-flex align-items-center header__content__right">
+                <h4><a routerLink="" class="header__logo">BRIGHT HOTELS</a></h4>
+                <ul class="d-flex nav__list">
+                    <li class="nav__item">
+                        <a href="">Groups & Meetings</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="">Support</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="">Trips</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="header__content__left">
+                <button type="button" *ngIf="isUserLoggedIn" (click)="onLogout()">
+                    LOGOUT
+                </button>
+                <a [hidden]="isUserLoggedIn" routerLink="/login">LOGIN</a>
+                <a [hidden]="isUserLoggedIn" routerLink="/register">REGISTER</a>
+                <a *ngIf="isUserLoggedIn" routerLink="/dashboard">DASHBOARD</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="d-flex align-items-center hero__section">
+    <div class="container">
+        <form action="#" class="col-md-5 hero__form">
+            <div class="row">
+                <div class="col-md-12 mb-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Choose The City" />
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="form-group">
+                        <div class="input-wrap">
+                            <div class="icon"><span class="ion-md-calendar"></span></div>
+                            <input type="date" class="form-control appointment_date-check-in" placeholder="Check-In" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="form-group">
+                        <div class="input-wrap">
+                            <div class="icon"><span class="ion-md-calendar"></span></div>
+                            <input type="date" class="form-control appointment_date-check-out"
+                                placeholder="Check-Out" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="form-group">
+                        <div class="form-field">
+                            <div class="select-wrap">
+                                <select name="" id="" class="form-control">
+                                    <option value="">Adults</option>
+                                    <option value="">1</option>
+                                    <option value="">2</option>
+                                    <option value="">3</option>
+                                    <option value="">4</option>
+                                    <option value="">5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="form-group">
+                        <div class="form-field">
+                            <div class="select-wrap">
+                                <select name="" id="" class="form-control">
+                                    <option value="">Children</option>
+                                    <option value="">1</option>
+                                    <option value="">2</option>
+                                    <option value="">3</option>
+                                    <option value="">4</option>
+                                    <option value="">5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Phone number" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-wrap">
+                            <div class="icon"><span class="ion-ios-clock"></span></div>
+                            <input type="text" class="form-control appointment_time ui-timepicker-input"
+                                placeholder="Time" autocomplete="off" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" class="hero__form__btn">
+                        CHECK ROOM AVAILABILTY
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<section class="hotels__section">
+    <div class="hotels__section__content">
+        <div class="container">
+            <div class="hotels__section__title">
+                <h5>Discover Our Hotels Collection</h5>
+                <span></span>
+            </div>
+            <div class="row hotels__content">
+                <div *ngFor="let hotel of hotels" class="col-3 hotel__item">
+                    <div class="hotel__image">
+                        <img src="{{ hotel.imageUrl }}" class="w-100" />
+                    </div>
+                    <h5 class="my-3">{{ hotel.name }}</h5>
+                    <p class="hotel__description">{{ hotel.description }}</p>
+                    <a routerLink="/hotel/rooms/{{ hotel.id }}" class="see__all_rooms_btn">SEE ALL ROOMS</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="offer__section">
+    <div>
+        <h2>Get 10% off On Your Next Booking</h2>
+        <p>
+            When you book your accommodation through this Booking.com discount link,
+            you will get 10% cash back in the form of a refund to your credit or debit
+            card after you have completed your stay booked through Booking.com. Is
+            there a catch here? Not really. It is pretty straightforward.
+        </p>
+        <button>Get Started</button>
+    </div>
+</section>
+
+<section class="rooms__section">
+    <div class="container">
+        <div class="hotels__section__title">
+            <h5>Discover Our Featured Rooms</h5>
+            <span></span>
+        </div>
+        <div class="row gap-5 rooms__layout">
+            <div class="col-8 rooms__content">
+                <div *ngFor="let room of rooms" class="room__item">
+                    <div class="row align-items-shrenk">
+                        <div class="col-3 room__image">
+                            <img src="{{ room.imageUrl }}" class="w-100" />
+                        </div>
+                        <div class="col-9 room__text">
+                            <h6 class="room__name">{{ room.name }}</h6>
+                            <p class="room__description">{{ room.description }}</p>
+                            <div class="d-flex justify-content-between">
+                                <p>
+                                    Price :
+                                    <span class="room__price">{{
+                                        room.price | currency : "USD"
+                                        }}</span>
+                                </p>
+                                <button class="room__details__link btn btn-sm" (click)="onSelectRoom(room)">
+                                    Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 rooms__sidebar">
+                <div class="filters__container" data-lp-ga-view="filter:view">
+                    <h6 class="filters__header mb-4 p-3"
+                        style="color: #eee; background-color: #344854; border-radius: 3px">
+                        Filter By :
+                    </h6>
+                    <div class="bui-spacer--large">
+                        <h5 class="filter__title">| Star Rating</h5>
+                        <hr />
+                        <div class="bui-group filters__list" role="group">
+                            <p>
+                                <input class="bui-checkbox__input" type="checkbox" />
+                                <span class="bui-checkbox__label filter__label ms-2">1 stars</span>
+                            </p>
+                            <p>
+                                <input class="bui-checkbox__input" type="checkbox" />
+                                <span class="bui-checkbox__label filter__label ms-2">2 stars</span>
+                            </p>
+                            <p>
+                                <input class="bui-checkbox__input" type="checkbox" />
+                                <span class="bui-checkbox__label filter__label ms-2">3 stars</span>
+                            </p>
+                            <p>
+                                <input class="bui-checkbox__input" type="checkbox" />
+                                <span class="bui-checkbox__label filter__label ms-2">4 stars</span>
+                            </p>
+                            <p>
+                                <input class="bui-checkbox__input" type="checkbox" />
+                                <span class="bui-checkbox__label filter__label ms-2">5 star</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bui-spacer--large">
+                        <h5 class="filter__title">| Review Score</h5>
+                        <hr />
+                        <div class="bui-group filters__list" role="group">
+                            <p>
+                                <input class="bui-checkbox__input" type="checkbox" />
+                                <span class="bui-checkbox__label filter__label ms-2">Superb: 9+</span>
+                            </p>
+                            <p>
+                                <input class="bui-checkbox__input" type="checkbox" />
+                                <span class="bui-checkbox__label filter__label ms-2">Very good: 8+</span>
+                            </p>
+                            <p>
+                                <input class="bui-checkbox__input" type="checkbox" />
+                                <span class="bui-checkbox__label filter__label ms-2">Good: 7+</span>
+                            </p>
+                            <p>
+                                <input class="bui-checkbox__input" type="checkbox" />
+                                <span class="bui-checkbox__label filter__label ms-2">Pleasant: 6+</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>Copyright &copy; All Right Reserved.</p>
+</footer>
+
+<!-- Start Room Information Button -->
+<button [hidden]="true" type="button" id="openRoomInfo" data-bs-toggle="modal" data-bs-target="#viewRoomModal"></button>
+<!-- End Room Information Button -->
+
+<!-- Start Room Information Modal -->
+<div class="modal fade bd-example-modal-lg" id="viewRoomModal" tabindex="-1" role="dialog" aria-labelledby=""
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLongTitle">
+                    | {{ selectedRoom.hotel.name }}
+                </h5>
+                <button type="button close-btn-modal" class="close close-btn-modal" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-sm-auto">
+                                    <div class="mx-auto" style="width: 150px">
+                                        <div class="d-flex justify-content-center align-items-center rounded">
+                                            <img class="rounded" width="150" src="{{ selectedRoom.imageUrl }}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col d-flex flex-column flex-sm-row justify-content-between">
+                                    <div class="text-sm-left mb-sm-0">
+                                        <h6 class="p-0 mb-2 text-nowrap">
+                                            <span>Name : </span>
+                                            <span>
+                                                {{ selectedRoom.name }}
+                                            </span>
+                                        </h6>
+                                        <div class="mb-2">
+                                            <span>Description : </span>
+                                            <span style="color: #666; font-size: 12px">{{
+                                                selectedRoom.description
+                                                }}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Price : </span>
+                                            <span style="color: #344854; font-weight: 600">{{
+                                                selectedRoom.price | currency : "USD"
+                                                }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fa-solid fa-utensils me-3"></i>
+                                <span>Restaurant</span>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fa-solid fa-person-swimming me-3"></i>
+                                <span>Swiming Pool</span>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fa-solid fa-square-parking me-3"></i>
+                                <span>Parking</span>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fa-solid fa-wifi me-3"></i>
+                                <span>Free Wi-Fi</span>
+                            </li>
+                            <li class="list-group-item">
+                                <span *ngIf="selectedRoom">
+                                    <i class="fa fa-unlock float-right me-3" style="color: green">
+                                    </i>
+                                    <span>Open</span>
+                                </span>
+                                <span [hidden]="selectedRoom">
+                                    <i class="fa fa-lock float-right me-3" style="color: #ffcc00">
+                                    </i>
+                                    <span>Reserved</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <button class="btn btn-sm btn-success" (click)="onBooking(selectedRoom.id)">
+                    Book This Room
+                </button>
+                <button type="button" id="hide-room-details-btn" class="btn btn-sm btn-secondary"
+                    data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Room Information Modal -->

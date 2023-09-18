@@ -1,0 +1,189 @@
+<main class="main">
+    <div class="container">
+        <div class="tab-content main__content">
+            <div class="tab-pane fade show active" id="rooms">
+                <div class="table__header">
+                    <div>
+                        <button type="button" class="btn ms-5 add__btn" data-bs-toggle="modal"
+                            data-bs-target="#addRoomModal">
+                            Add Room
+                        </button>
+                    </div>
+                </div>
+                <table class="table table-hover table-bordered">
+                    <thead class="table-borderless">
+                        <tr class="text-center">
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Hotel</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let room of rooms">
+                        <tr class="text-center">
+                            <td>{{ room.id }}</td>
+                            <td>
+                                <img src="{{ room.imageUrl }}" style="width: 60px" />
+                            </td>
+                            <td>{{ room.name }}</td>
+                            <td>{{ room.hotel.name }}</td>
+                            <td>{{ room.price }}</td>
+                            <td>
+                                <span *ngIf="room.isavailable" class="btn btn-sm btn-primary">OPEN</span>
+                                <span *ngIf="!room.isavailable" class="btn btn-sm btn-success">RESERVED</span>
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-between">
+                                    <button class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#editRoomModal" (click)="onEditRoom(room)">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" (click)="onDeleteRoom(room.id)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="modal draggable fade bd-example-modal-lg" id="addRoomModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content px-3">
+            <div class="modal-header">
+                <h5 class="modal-title text-center">Add New Room</h5>
+                <button type="button" class="close close-btn-modal" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div>
+                    <form #newRoomForm="ngForm" (ngSubmit)="onAddNewRoom(newRoomForm.value)">
+
+                        <div class="form-group mb-3">
+                            <label for="name" class="mb-2">Name</label>
+                            <input type="text" name="name" required ngModel class="form-control" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="description" class="mb-2">Description</label>
+                            <textarea class="form-control" name="description" required ngModel rows="3"></textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                <label class="mb-2 me-2 d-block">Image</label>
+                                <input type="file" accept="image/*" name="roomImage" class="custom-file-input"
+                                    (change)="onRoomImageChange($event)" />
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="authority">Hotel</label>
+                            <select name="hotelId" required ngModel class="form-control">
+                                <option *ngFor="let hotel of hotels" value="{{ hotel.id }}">
+                                    {{ hotel.name }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="price" class="mb-2">Price</label>
+                            <input type="number" name="price" required ngModel class="form-control" />
+                        </div>
+                        <div class="form-check mb-3">
+                            <label class="form-check-label">
+                                <input type="checkbox" name="isavailable" ngModel class="form-check-input" />
+                                Available
+                            </label>
+                        </div>
+                        <button type="submit" style="display: none" id="new-room-save"></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="new-room-close">
+                    Close
+                </button>
+                <button type="button" [disabled]="newRoomForm.invalid" class="btn btn-primary" (click)="saveNewRoom()">
+                    Add Room
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal draggable fade bd-example-modal-lg" id="editRoomModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content px-3">
+            <div class="modal-header">
+                <h5 class="modal-title text-center">Edit : {{ editedRoom.name }}</h5>
+                <button type="button" class="close close-btn-modal" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div>
+                    <form #editRoomForm="ngForm" method="put">
+                        <div class="form-group mb-2">
+                            <label for="name" class="mb-1">Room Name</label>
+                            <input type="text" name="name" required [(ngModel)]="editedRoom.name"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="description" class="mb-1">Description</label>
+                            <textarea class="form-control" name="description" required
+                                [(ngModel)]="editedRoom.description" rows="3"></textarea>
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="custom-file">
+                                <label class="mb-1 me-2 d-block">Room Image</label>
+                                <input type="file" accept="image/*" name="roomImage" class="custom-file-input"
+                                    (change)="onRoomImageChange($event)" />
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="price" class="mb-1">Price</label>
+                            <input type="text" name="price" required [(ngModel)]="editedRoom.price"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="hotelId">Hotel</label>
+                            <select name="hotelId" required [(ngModel)]="editedRoom.hotel" class="form-control">
+                                <option *ngFor="let hotel of hotels" value="{{ hotel.id }}">
+                                    {{ hotel.name }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-check mb-2">
+                            <label class="form-check-label">
+                                <input type="checkbox" name="isavailable" [(ngModel)]="editedRoom.isavailable"
+                                    class="form-check-input" />
+                                Available
+                            </label>
+                        </div>
+
+                        <button type="submit" style="display: none" id="new-room-save"></button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeEditRoomModalButton">
+                    Close
+                </button>
+                <button type="button" [disabled]="editRoomForm.invalid" class="btn btn-primary"
+                    (click)="onUpdateRoom()">
+                    Update Room
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

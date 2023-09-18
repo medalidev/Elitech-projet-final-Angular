@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ANGULAR APPLICATION | LOGIN</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center header__content">
+                <div class="d-flex align-items-center header__content__right">
+                    <h4><a routerLink="" class="header__logo">BRIGHT HOTELS</a></h4>
+                    <ul class="d-flex nav__list">
+                        <li class="nav__item">
+                            <a href="">Groups & Meetings</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="">Support</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="">Trips</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="header__content__left">
+                    <a routerLink="/login">LOGIN</a>
+                    <a routerLink="/register">REGISTER</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="login">
+        <div class="login__content">
+            <div class="d-flex justify-content-between login__header">
+                <h5 class="mb-5">| Enter Your Credentials</h5>
+                <div class="login__icons">
+                    <i class="fa-brands fa-square-facebook"></i>
+                    <i class="fa-brands fa-square-instagram"></i>
+                    <i class="fa-brands fa-square-twitter"></i>
+                    <i class="fa-brands fa-linkedin"></i>
+                </div>
+            </div>
+            <form class="login__form" #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)">
+                <div class="mb-3">
+                    <label for="" class="form-label">Email</label>
+                    <input type="text" class="form-control" name="email" ngModel #emailInput="ngModel" required />
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Password</label>
+
+                    <input type="password" class="form-control" name="password" ngModel #passwordInput="ngModel" />
+                </div>
+                <button type="submit" class="w-100 btn btn-primary">LOGIN</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

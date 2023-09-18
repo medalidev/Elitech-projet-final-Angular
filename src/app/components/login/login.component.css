@@ -1,0 +1,98 @@
+/* Start Header Section */
+* {
+    box-sizing: border-box;
+}
+
+h4 {
+    margin-bottom: 0;
+}
+
+ul {
+    list-style: none;
+    margin-bottom: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header {
+    border: 1px solid #eee;
+}
+
+.header__top {
+    padding: 10px;
+    background-color: #344854;
+}
+
+.header__top span {
+    color: #eee;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.header__top a {
+    color: #eee;
+    font-size: 14px;
+}
+
+.header__content {
+    padding: 30px 0;
+}
+
+.header__content__right a {
+    color: #344854;
+}
+
+.header__content__left a {
+    margin-left: 20px;
+    color: #344854;
+}
+
+.header__content__left button {
+    border: 0;
+    color: #344854;
+    background-color: transparent;
+}
+
+.header__logo {
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.nav__item {
+    margin-left: 25px;
+}
+
+/* End Header Section */
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 88vh;
+    background-color: #eff2ff;
+}
+
+.login__content {
+    border-radius: 5px;
+    width: 400px;
+    height: 400px;
+}
+
+.login__icons i {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.login__form input {
+    padding: 8px;
+}
+
+.login__form button {
+    border: 0;
+    margin-top: 10px;
+    padding: 11px;
+    background-color: #253139;
+}

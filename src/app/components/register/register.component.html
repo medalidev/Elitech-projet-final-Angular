@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>REGISTRATION</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center header__content">
+                <div class="d-flex align-items-center header__content__right">
+                    <h4><a routerLink="" class="header__logo">BRIGHT HOTELS</a></h4>
+                    <ul class="d-flex nav__list">
+                        <li class="nav__item">
+                            <a href="">Groups & Meetings</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="">Support</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="">Trips</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="header__content__left">
+                    <a routerLink="/login">LOGIN</a>
+                    <a routerLink="/register">REGISTER</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="login">
+        <div class="login__content">
+            <form class="login__form" #registerForm="ngForm" (ngSubmit)="onRegister(registerForm.value)">
+                <div class="row">
+                    <div class="mb-3 col">
+                        <label for="" class="form-label">First Name</label>
+                        <input type="text" class="form-control" name="firstname" ngModel #firstnameInput="ngModel"
+                            required />
+                    </div>
+                    <div class="mb-3 col">
+                        <label for="" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" name="lastname" ngModel #lastnameInput="ngModel" />
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Email</label>
+                    <input type="text" class="form-control" name="email" ngModel #emailInput="ngModel" />
+                </div>
+                <div class="col mb-3">
+                    <div class="form-group">
+                        <label for="authority" class="select__label">Role</label>
+                        <select name="role" required ngModel="ROLE_CLIENT" class="form-control">
+                            <option value="CLIENT">CLIENT</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Password</label>
+
+                    <input type="text" class="form-control" name="password" ngModel #passwordInput="ngModel" />
+                </div>
+
+                <button type="submit" class="w-100 btn btn-primary">REGISTER</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
